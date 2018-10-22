@@ -10,27 +10,32 @@ class Campeon{
 	
 	var itemsEquipados = []
 	
+	//
 	method agregarItems(item) {
 		itemsEquipados.add(item)
-		puntosDeVida += item.aportaVida()
-		puntosDeAtaque += item.aportaAtaque()
-		puntosDeDanio += item.aportaDanio()
-		bloqueos += item.aportaBloqueos()
+		item.equiparA(self)
 		
 	} 
-	
-	method removerItems(item) = itemsEquipados.remove(item)
+
+	method removerItems(item){
+		itemsEquipados.remove(item)
+		item.desequipaA(self)
+		
+	} 
 	
 	method estaVivo(){
 		return puntosDeVida >= puntosDeDanio
 	}
 	
+	//Maza
 	method recibirAtaque(danioDelAtaque){
 		
 	}
 	
+	//Maza
 	method atacarA(unaOleada){
-	
+		unaOleada.recibirAtaque(self.puntosDeAtaque())
+		self.recibirAtaque(unaOleada.atacarA(self))
 	}
 	
 }
