@@ -7,6 +7,7 @@ class Campeon{
 	var property puntosDeAtaque = null
 	var property puntosDeDanio = null
 	var property bloqueos = null 
+
 	
 	var itemsEquipados = []
 	
@@ -28,7 +29,14 @@ class Campeon{
 	}
 	
 	//Maza
+
+	
 	method recibirAtaque(danioDelAtaque){
+		if(bloqueos >= 1){}
+		else{
+			puntosDeVida -= danioDelAtaque
+			bloqueos -= 1
+		}
 		
 	}
 	
