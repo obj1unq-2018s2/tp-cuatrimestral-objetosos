@@ -3,16 +3,9 @@ import campeones.*
 
 
 class OleadaMinions{
-	var property cantidadDeMinios = null
-	var property plus = null 
-	
-	method recibirAtaque(danioDelAtaque){
+	var  cantidadMinions = null
+	var  plus = null 
 		
-		
-	}
-	
-	method atacarA(unCampeon){
-		unCampeon.recibirAtaque(cantidadDeMinios + plus )
-	} 
+	method ataque() = cantidadMinions + plus 
 	
 }

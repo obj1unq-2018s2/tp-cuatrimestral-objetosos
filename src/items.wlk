@@ -2,43 +2,57 @@ import oleadaMinions.*
 import campeones.*
 
 
-// Pablo 
+
 class AnilloDeDoran {
 	
-	method puntosVida(campeon) = 60
+	var _campeon 
 	
-	method puntosAtaque() = 15 
+	method vida() = 60
 	
-	method puntosDanios() = 5
+	method ataque() = 15 
+
 	
 	method equiparA(campeon){
-		// campeon recibe daño  en 5 
+		_campeon = campeon
+		campeon.recibirDanio(5)
 	}
 	
-	method desequiparA(campeon){
-		// campeon recuepera 10 
+	method desequiparA(campeon){		
+		campeon.recibirDanio(-10)
+		_campeon = null
 	} 
 }
 
 
-class TomoAmplificador inherits Items{
+class TomoAmplificador {
 	
+	var _campeon 
 	
-	method puntosVida() = 
+	method vida() = _campeon.danio()*1.25
 	
-	method puntosAtaque() =  
-	
-	method puntosDanios() = 
+	method ataque() = _campeon.danio()*1.05
 	
 	method equiparA(campeon){
-		// campeon recibe 2 bloqueo
+		_campeon = campeon
+		campeon.recibirBloqueos(2)
 	}
 	
-	method desequipar(campeon){
-		// campeon recibe 30 daños y 1 bloqueo
+	method desequiparA(campeon){		
+		campeon.recibirBloqueos(1)
+		campeon.recibirDanio(30)
+		_campeon = null
 	} 
 }
 
 class  SombreroDeRabadon inherits TomoAmplificador{
+	override method vida(){
+		return super() + 5
+	} 
 	
+	override method ataque(){
+		return _campeon.ataqueBase() * 2 
+	} 
+	
+	
+	override method desequiparA(campeon){} 
 }

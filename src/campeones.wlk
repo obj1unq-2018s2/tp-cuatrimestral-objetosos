@@ -3,47 +3,53 @@ import items.*
 
 
 class Campeon{
-	var property puntosDeVida = null
-	var property puntosDeAtaque = null
-	var property puntosDeDanio = null
-	var property bloqueos = null 
-
+	const vidaBase	
+	const property ataqueBase
+	
+	
+	var puntosDeDanio = 0
+	var bloqueos = 0 
 	
 	var itemsEquipados = []
 	
-	//
-	method agregarItems(item) {
+		
+	method recibirBloqueos(cant){
+		bloqueos += cant
+	}
+	
+	method danio(){  
+		return puntosDeDanio
+	}
+	
+	method recibirDanio(danio){
+		puntosDeDanio += danio
+	}
+	
+	method vida() = vidaBase + itemsEquipados.sum{item=> item.vida()}
+	
+	method ataque() = ataqueBase + itemsEquipados.sum{item=> item.ataque()}
+	
+	
+	method agregarItem(item) {
 		itemsEquipados.add(item)
 		item.equiparA(self)
 		
 	} 
 
-	method removerItems(item){
+	method removerItem(item){
 		itemsEquipados.remove(item)
-		item.desequipaA(self)
+		item.desequiparA(self)
 		
 	} 
 	
 	method estaVivo(){
-		return puntosDeVida >= puntosDeDanio
-	}
+		return self.vida() >= puntosDeDanio
+	}	
 	
-	//Maza
-
-	
-	method recibirAtaque(danioDelAtaque){
-		if(bloqueos >= 1){}
-		else{
-			puntosDeVida -= danioDelAtaque
-			bloqueos -= 1
+	method atacarA(unaOleada){		
+		if (bloqueos ==  0){
+			self.recibirDanio(unaOleada.ataque())
 		}
-		
+		else{bloqueos -= 1}
 	}
-	
-	//Maza
-	method atacarA(unaOleada){
-		unaOleada.recibirAtaque(self.puntosDeAtaque())
-		self.recibirAtaque(unaOleada.atacarA(self))
-	}
-	
 }
