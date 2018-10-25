@@ -25,9 +25,9 @@ class Campeon{
 		puntosDeDanio += danio
 	}
 	
-	method vida() = vidaBase + itemsEquipados.sum{item=> item.vida()}
+	method vida() = vidaBase + itemsEquipados.sum{item=> item.vida(self)}
 	
-	method ataque() = ataqueBase + itemsEquipados.sum{item=> item.ataque()}
+	method ataque() = ataqueBase + itemsEquipados.sum{item=> item.ataque(self)}
 	
 	
 	method agregarItem(item) {

@@ -2,9 +2,6 @@ import oleadaMinions.*
 import campeones.*
 import items.*
 
-
- 
-
 describe " Testiando LOL "{
 	
 	const ashe = new Campeon(
@@ -15,6 +12,8 @@ describe " Testiando LOL "{
 	const anilloDoran = new AnilloDeDoran()
 	
 	const tomoAmplificador = new TomoAmplificador()
+	
+	const sombreroDeRabadon = new SombreroDeRabadon()
 	
 	const oleada1 = new OleadaMinions(
 		cantidadMinions = 10,
@@ -38,12 +37,7 @@ describe " Testiando LOL "{
 		assert.equals(30,ashe.ataque())
 	}
 	
-	//test "Campeon Ashe y  Tomo"{
-		//assert.equals(50,ashe.vida())
-		//assert.equals(15,ashe.ataque())
-		//ashe.agregarItem(tomoAmplificador)
-		//assert.equals(110,ashe.vida())
-		//assert.equals(30,ashe.ataque())	
-		
-	//}
+	test "Ashe esta viva?"{
+		assert.that(ashe.estaVivo())	
+	}
 }

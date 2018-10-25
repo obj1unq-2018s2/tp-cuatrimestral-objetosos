@@ -3,8 +3,8 @@ import campeones.*
 
 
 class OleadaMinions{
-	var  cantidadMinions = null
-	var  plus = null 
+	var property cantidadMinions
+	var property plus
 		
 	method ataque() = cantidadMinions + plus 
 	
