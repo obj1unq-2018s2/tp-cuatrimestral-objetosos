@@ -9,6 +9,11 @@ describe " Testiando LOL "{
 		ataqueBase = 15
 	)
 	
+	const zetar = new Campeon(
+		vidaBase = 25,
+		ataqueBase = 10
+	)
+	
 	const anilloDoran = new AnilloDeDoran()
 	
 	const tomoAmplificador = new TomoAmplificador()
@@ -39,5 +44,33 @@ describe " Testiando LOL "{
 	
 	test "Ashe esta viva?"{
 		assert.that(ashe.estaVivo())	
+	}
+	
+	test"Zetar"{
+		
+		zetar.agregarItem(tomoAmplificador)
+		zetar.agregarItem(sombreroDeRabadon)
+		
+		assert.equals(42.5,zetar.vida())
+		assert.equals(35.25,zetar.ataque())
+		zetar.atacarA(oleada1)
+		assert.equals(42.5,zetar.vida())
+		
+		zetar.removerItem(tomoAmplificador)
+		zetar.atacarA(oleada1)
+		zetar.atacarA(oleada1)
+		assert.equals(35,zetar.danio())
+		assert.that(zetar.estaVivo())
+		
+		zetar.removerItem(sombreroDeRabadon)
+		zetar.atacarA(oleada1)
+		zetar.atacarA(oleada1)
+		assert.equals(35,zetar.danio())
+		assert.equals(25,zetar.vida())
+		assert.notThat(zetar.estaVivo())
+		
+		
+
+		
 	}
 }
