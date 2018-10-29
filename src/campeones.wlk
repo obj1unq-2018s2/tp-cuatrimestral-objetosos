@@ -50,6 +50,8 @@ class Campeon{
 		if (bloqueos ==  0){
 			self.recibirDanio(unaOleada.ataque())
 		}
-		else{bloqueos -= 1}
+		else{
+			bloqueos = bloqueos - 1
+		}
 	}
 }
