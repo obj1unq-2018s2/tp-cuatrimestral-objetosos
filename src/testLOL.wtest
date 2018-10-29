@@ -22,7 +22,7 @@ describe " Testiando LOL "{
 	
 	const oleada1 = new OleadaMinions(
 		cantidadMinions = 10,
-		plus = 5
+		plus = 25
 	)
 	
 	fixture{
