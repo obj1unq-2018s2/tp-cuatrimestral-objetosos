@@ -3,8 +3,8 @@ import items.*
 
 
 class Campeon{
-	const vidaBase	
-	const property ataqueBase
+	const vidaBase = null
+	const property ataqueBase = null
 	
 	
 	var puntosDeDanio = 0
