@@ -3,8 +3,8 @@ import items.*
 
 
 class Campeon{
-	const vidaBase	
-	const property ataqueBase
+	const vidaBase = null
+	const property ataqueBase = null
 	
 	
 	var puntosDeDanio = 0
@@ -25,9 +25,9 @@ class Campeon{
 		puntosDeDanio += danio
 	}
 	
-	method vida() = vidaBase + itemsEquipados.sum{item=> item.vida()}
+	method vida() = vidaBase + itemsEquipados.sum{item=> item.vida(self)}
 	
-	method ataque() = ataqueBase + itemsEquipados.sum{item=> item.ataque()}
+	method ataque() = ataqueBase + itemsEquipados.sum{item=> item.ataque(self)}
 	
 	
 	method agregarItem(item) {
@@ -50,6 +50,8 @@ class Campeon{
 		if (bloqueos ==  0){
 			self.recibirDanio(unaOleada.ataque())
 		}
-		else{bloqueos -= 1}
+		else{
+			bloqueos = bloqueos - 1
+		}
 	}
 }

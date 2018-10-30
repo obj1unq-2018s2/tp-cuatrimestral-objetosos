@@ -2,48 +2,54 @@ import oleadaMinions.*
 import campeones.*
 import items.*
 
-
- 
-
 describe " Testiando LOL "{
 	
-	const ashe = new Campeon(
-		vidaBase = 50,
-		ataqueBase = 15
-	)
+	const ashe = new Campeon(vidaBase = 50,ataqueBase = 15)
+	
+	const zetar = new Campeon(vidaBase = 25,ataqueBase = 10)
 	
 	const anilloDoran = new AnilloDeDoran()
 	
 	const tomoAmplificador = new TomoAmplificador()
 	
-	const oleada1 = new OleadaMinions(
-		cantidadMinions = 10,
-		plus = 5
-	)
+	const sombreroDeRabadon = new SombreroDeRabadon()
+	
+	const oleada1 = new OleadaMinions(cantidadMinions = 10, plus = 25)
 	
 	fixture{
 		ashe.agregarItem(anilloDoran)
 		ashe.agregarItem(tomoAmplificador)
 	}
+	
 	test "Test De Entrega"{		
 		ashe.atacarA(oleada1)
 		ashe.atacarA(oleada1)
+		ashe.atacarA(oleada1)
 		ashe.removerItem(tomoAmplificador)
-		assert.that( ashe.estaVivo())
+		ashe.removerItem(anilloDoran)
+		assert.notThat(ashe.estaVivo())
 	}
 	
-	test "Campeon Ashe  y  Anillo "{
-		ashe.removerItem(tomoAmplificador)
-		assert.equals(110,ashe.vida())
-		assert.equals(30,ashe.ataque())
-	}
-	
-	//test "Campeon Ashe y  Tomo"{
-		//assert.equals(50,ashe.vida())
-		//assert.equals(15,ashe.ataque())
-		//ashe.agregarItem(tomoAmplificador)
-		//assert.equals(110,ashe.vida())
-		//assert.equals(30,ashe.ataque())	
+	test"Zetar"{
+		zetar.agregarItem(tomoAmplificador)
+		zetar.agregarItem(sombreroDeRabadon)
 		
-	//}
+		assert.equals(42.5,zetar.vida())
+		assert.equals(35.25,zetar.ataque())
+		zetar.atacarA(oleada1)
+		assert.equals(42.5,zetar.vida())
+		
+		zetar.removerItem(tomoAmplificador)
+		zetar.atacarA(oleada1)
+		zetar.atacarA(oleada1)
+		assert.equals(35,zetar.danio())
+		assert.that(zetar.estaVivo())
+		
+		zetar.removerItem(sombreroDeRabadon)
+		zetar.atacarA(oleada1)
+		zetar.atacarA(oleada1)
+		assert.equals(35,zetar.danio())
+		assert.equals(25,zetar.vida())
+		assert.notThat(zetar.estaVivo())
+	}
 }
