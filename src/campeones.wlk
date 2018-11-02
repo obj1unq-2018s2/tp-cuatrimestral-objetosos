@@ -30,11 +30,11 @@ class Campeon{
 	}
 	
 	method recibirDanio(danio){
-		if(puntosDeDanio < danio){
+	//	if(puntosDeDanio < danio){
 			puntosDeDanio += danio
-		}else{
-			puntosDeDanio == 0
-		}
+	//	}else{
+	//		puntosDeDanio == 0
+	//	}
 	}
 	
 	method vida() = vidaBase + itemsEquipados.sum{item=> item.vida(self)}
@@ -55,7 +55,7 @@ class Campeon{
 	} 
 	
 	method estaVivo(){
-		return self.vida() >= puntosDeDanio
+		return self.vida() > puntosDeDanio
 	}	
 
 	method dineroRecolectadoDe(minions) = if(self.ataque() > minions) minions else self.ataque() 

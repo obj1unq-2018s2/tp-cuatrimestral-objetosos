@@ -23,7 +23,7 @@ describe " Testiando LOL "{
 		ashe.agregarItem(tomoAmplificador)
 	}
 	
-	test "Test De Entrega"{		
+	test "Test De Entrega"{
 		ashe.atacarA(oleada1)
 		ashe.atacarA(oleada1)
 		ashe.atacarA(oleada1)
@@ -55,5 +55,22 @@ describe " Testiando LOL "{
 		assert.equals(35,zetar.danio())
 		assert.equals(25,zetar.vida())
 		assert.notThat(zetar.estaVivo())
+	}
+	
+	test"campeon vs ejercito"{
+		
+		const campeon1 = new Campeon(vidaBase = 50,ataqueBase = 20, dinero = 300)
+		
+		const oleadaA = new OleadaMinions(cantidadMinions = 20, plus = 5)
+		
+		const oleadaB = new OleadaMinions(cantidadMinions = 10, plus = 15)
+		
+		const ejercito1 = new EjercitoMinions(ejercito = [oleadaA,oleadaB])
+		
+		assert.equals(50,ejercito1.ataque())
+		assert.equals(30,ejercito1.cantidadMinions())
+		campeon1.atacarA(ejercito1)
+		assert.notThat(ejercito1.ejercitoVivo())
+		assert.notThat(campeon1.estaVivo())
 	}
 }
