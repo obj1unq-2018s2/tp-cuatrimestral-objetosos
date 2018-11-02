@@ -6,12 +6,20 @@ class Campeon{
 	const vidaBase = null
 	const property ataqueBase = null
 	
-	
 	var puntosDeDanio = 0
 	var bloqueos = 0 
-	
 	var itemsEquipados = []
+	var property dinero
 	
+	method comprar(item){
+		dinero -= item.precio()
+		self.agregarItem(item)
+		}
+			
+	method vender(item){
+		dinero += item.precio() / 2 
+		self.removerItem(item)		
+	}
 		
 	method recibirBloqueos(cant){
 		bloqueos += cant
@@ -22,7 +30,11 @@ class Campeon{
 	}
 	
 	method recibirDanio(danio){
-		puntosDeDanio += danio
+		if(puntosDeDanio < danio){
+			puntosDeDanio += danio
+		}else{
+			puntosDeDanio == 0
+		}
 	}
 	
 	method vida() = vidaBase + itemsEquipados.sum{item=> item.vida(self)}
@@ -45,13 +57,20 @@ class Campeon{
 	method estaVivo(){
 		return self.vida() >= puntosDeDanio
 	}	
+
+	method dineroRecolectadoDe(minions) = if(self.ataque() > minions) minions else self.ataque() 
+	//esta conciderado que si la cantidad de minions son 0 (osea estan muertos) retorna  0 
 	
 	method atacarA(unaOleada){		
 		if (bloqueos ==  0){
 			self.recibirDanio(unaOleada.ataque())
+			dinero += self.dineroRecolectadoDe(unaOleada.cantidadMinions())
+			unaOleada.recibirAtaque(self.ataque())
 		}
 		else{
 			bloqueos = bloqueos - 1
+
+			unaOleada.recibirAtaque(self.ataque())
 		}
 	}
 }

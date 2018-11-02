@@ -4,13 +4,15 @@ import items.*
 
 describe " Testiando LOL "{
 	
-	const ashe = new Campeon(vidaBase = 50,ataqueBase = 15)
+	const ashe = new Campeon(vidaBase = 50,ataqueBase = 15, dinero = 1000)
 	
-	const zetar = new Campeon(vidaBase = 25,ataqueBase = 10)
+	const zetar = new Campeon(vidaBase = 25,ataqueBase = 10, dinero = 200)
 	
 	const anilloDoran = new AnilloDeDoran()
 	
 	const tomoAmplificador = new TomoAmplificador()
+	
+	const tomoAmplificador2 = new TomoAmplificador()
 	
 	const sombreroDeRabadon = new SombreroDeRabadon()
 	
@@ -25,19 +27,21 @@ describe " Testiando LOL "{
 		ashe.atacarA(oleada1)
 		ashe.atacarA(oleada1)
 		ashe.atacarA(oleada1)
-		ashe.removerItem(tomoAmplificador)
 		ashe.removerItem(anilloDoran)
-		assert.notThat(ashe.estaVivo())
+		ashe.removerItem(tomoAmplificador)
+		ashe.agregarItem(tomoAmplificador2)
+		ashe.removerItem(tomoAmplificador2)
+		assert.that( not ashe.estaVivo())
 	}
 	
 	test"Zetar"{
 		zetar.agregarItem(tomoAmplificador)
 		zetar.agregarItem(sombreroDeRabadon)
 		
-		assert.equals(42.5,zetar.vida())
-		assert.equals(35.25,zetar.ataque())
+		assert.equals(32.5,zetar.vida())
+		assert.equals(30.25,zetar.ataque())
 		zetar.atacarA(oleada1)
-		assert.equals(42.5,zetar.vida())
+		assert.equals(32.5,zetar.vida())
 		
 		zetar.removerItem(tomoAmplificador)
 		zetar.atacarA(oleada1)
