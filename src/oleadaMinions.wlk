@@ -22,7 +22,7 @@ class OleadaMinions{
 	method cantidadMinions() = cantidadMinions
 	
 	
-	
+	 
 }
 
 class EjercitoMinions {
