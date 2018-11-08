@@ -1,8 +1,14 @@
 import oleadaMinions.*
 import campeones.*
 
+
 class AnilloDeDoran {
-	var property activado
+	
+	var puedeActivarHabilidad = false
+	
+	method precio() = 100
+	
+	method habilidadActivable(campeon) { self.error("item no posee habilidad activable") }
 	
 	method vida(campeon) = 60
 	
@@ -16,19 +22,25 @@ class AnilloDeDoran {
 	method desequiparA(campeon){		
 		campeon.recibirDanio(-10)
 	} 
-	
-	method precio() = 300
-	
-	method habilidad(campeon){}
 }
 
 
 class TomoAmplificador {
-	var property activado //BOOL
 	
-	method vida(campeon) = campeon.danio() * 0.25
+	var puedeActivarHabilidad = true
 	
-	method ataque(campeon) = campeon.danio() * 0.05
+	method precio() = 500
+	
+	method habilidadActivable(campeon){
+		if (puedeActivarHabilidad && campeon.dinero() < 500) {
+			campeon.dinero(self.precio())
+			puedeActivarHabilidad = false
+		}
+	}
+	
+	method vida(campeon) = campeon.danio() * 1.25
+	
+	method ataque(campeon) = campeon.danio() * 1.05
 	
 	method equiparA(campeon){
 		campeon.recibirBloqueos(2)
@@ -38,21 +50,13 @@ class TomoAmplificador {
 		campeon.recibirBloqueos(1)
 		campeon.recibirDanio(30)
 	}
-	
-	method precio() = 500
-	
-	method habilidad(campeon){
-		if(activado){
-			if(campeon.dinero() < 500){
-				campeon.dinero(500)
-			}
-		}
-	}
-	
-	
 }
-
+ 
 class  SombreroDeRabadon inherits TomoAmplificador{
+	override method precio() = super() + 100
+
+	override method habilidadActivable(campeon){ self.error("item no posee habilidad activable") }
+	
 	override method vida(campeon){
 		return super(campeon) + 5
 	} 
@@ -67,32 +71,18 @@ class  SombreroDeRabadon inherits TomoAmplificador{
 	}
 	
 	override method desequiparA(campeon){} 
-	
-	override method precio() = super() + 100 
-	
-	override method habilidad(campeon){}
 }
 
-class PocionDeVida{
-	var property activado //BOOL
-	var usos =  2
-	
-	method vida(campeon) = 0
-		
-	method ataque(campeon) = 0
-	
-	method equiparA(campeon){}
-	
-	method desequiparA(campeon){}
-	
+class Pocion {
+	var puedeActivarHabilidad = true
+	var cantidad = 2
 	method precio() = 50
-	
-	method habilidad(campeon){
-		if(activado){
-			if(usos > 0){
-				campeon.recibirDanio(-50)
-				usos -= 1
-			}else{}
+	method vida(campeon) = 0
+	method ataque(campeon) = 0
+	method habilidadActivable(campeon){ 
+		if (puedeActivarHabilidad && cantidad > 0) {
+			campeon.puntosDeDanio(-50)
+			cantidad = cantidad - 1
 		}
-	}	
+	}
 }
