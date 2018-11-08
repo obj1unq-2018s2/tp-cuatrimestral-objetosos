@@ -10,11 +10,11 @@ class OleadaMinions{
 	
 	method recibirAtaque(danio) {
 	  if(cantidadMinions > danio){
-		 	 cantidadMinions -= danio
-		 	 }
-		 	 else {
-		 	 	cantidadMinions *= 0
-		 	 }
+	 	 cantidadMinions -= danio
+	 	 }
+	 	 else {
+	 	 	cantidadMinions = 0
+	  }
 	}
 	
 	method oleadaViva() = cantidadMinions > 0 

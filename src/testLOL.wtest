@@ -73,4 +73,15 @@ describe " Testiando LOL "{
 		assert.notThat(ejercito1.ejercitoVivo())
 		assert.notThat(campeon1.estaVivo())
 	}
+	
+	test "actualizacion test parte 2"{
+		ashe.atacarA(oleada1)
+		ashe.atacarA(oleada1)
+		ashe.atacarA(oleada1)
+		ashe.removerItem(anilloDoran)
+		ashe.removerItem(tomoAmplificador)
+		ashe.agregarItem(tomoAmplificador2)
+		ashe.removerItem(tomoAmplificador2)
+		assert.that( not ashe.estaVivo())
+	}
 }
