@@ -11,10 +11,12 @@ class Campeon{
 	var itemsEquipados = []
 	var property dinero
 	
+	method itemsEquipados() = itemsEquipados
+	
 	method comprar(item){
 		dinero -= item.precio()
 		self.agregarItem(item)
-		}
+	}
 			
 	method vender(item){
 		dinero += item.precio() / 2 
@@ -32,8 +34,15 @@ class Campeon{
 	method recibirDanio(danio){
 		if(puntosDeDanio < danio){
 			puntosDeDanio += danio
-		}else{
+		}
+		else{
 			puntosDeDanio == 0
+		}
+	}
+	
+	method recudirDanio(danio){
+		if (puntosDeDanio > 0) {
+			puntosDeDanio -= danio
 		}
 	}
 	
@@ -42,16 +51,14 @@ class Campeon{
 	method ataque() = ataqueBase + itemsEquipados.sum{item=> item.ataque(self)}
 	
 	
-	method agregarItem(item) {
+	method agregarItem(item){
 		itemsEquipados.add(item)
 		item.equiparA(self)
-		
 	} 
 
 	method removerItem(item){
 		itemsEquipados.remove(item)
 		item.desequiparA(self)
-		
 	} 
 	
 	method estaVivo(){
@@ -69,8 +76,9 @@ class Campeon{
 		}
 		else{
 			bloqueos = bloqueos - 1
-
 			unaOleada.recibirAtaque(self.ataque())
 		}
 	}
+	
+	method activarHabilidadItem(item){ item.habilidad(self)}
 }
