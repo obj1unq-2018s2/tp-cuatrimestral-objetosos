@@ -2,7 +2,6 @@ import oleadaMinions.*
 import campeones.*
 
 class Item {
-	var activado = false
 	
 	method vida(campeon) = 0
 	method ataque(campeon) = 0
@@ -14,7 +13,6 @@ class Item {
 	
 	method precio() = 0
 	
-	method activar(){ activado = true}
 		
 }
 
@@ -55,11 +53,9 @@ class TomoAmplificador inherits Item {
 	override method precio() = 500
 	
 	override method habilidad(campeon){
-		if(activado){
-			if(campeon.dinero() < 500){
+		if(campeon.dinero() < 500){
 				campeon.dinero(500)
 			}
-		}
 	}
 	
 	
@@ -86,12 +82,10 @@ class PocionDeVida inherits Item{
 	
 
 	override method habilidad(campeon){
-		if(activado){
-			if(usos > 0){
+		if(usos > 0){
 				campeon.recibirDanio(-50)
 				usos -= 1
 			}else{}
-		}
 	}
 	
 }
@@ -105,8 +99,6 @@ class BastonDelVacio inherits Item{
 	override method ataque(campeon) = materiales.sum{material => material.ataque(campeon)}
 	
 	override method habilidad(campeon){
-		if(activado){
-			materiales.forEach{material => material.habilidad(campeon)}
-		}
+		materiales.forEach{material => material.habilidad(campeon)}
 	}
 }

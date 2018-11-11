@@ -3,15 +3,14 @@ import items.*
 
 
 class Campeon{
-	const vidaBase = null
-	const property ataqueBase = null
+	const vidaBase 
+	const property ataqueBase
 	
 	var puntosDeDanio = 0
 	var bloqueos = 0 
-	var itemsEquipados = []
+	const property itemsEquipados = []
 	var property dinero
 	
-	method itemsEquipados() = itemsEquipados
 	
 	method comprar(item){
 		dinero -= item.precio()
@@ -27,12 +26,15 @@ class Campeon{
 		bloqueos += cant
 	}
 	
-	method danio(){  
-		return puntosDeDanio
-	}
+	method danio() = puntosDeDanio
+	
 	
 	method recibirDanio(danio){
-		puntosDeDanio += danio
+		if(puntosDeDanio  <=  danio){
+			puntosDeDanio += danio
+		}else{
+			puntosDeDanio = 0
+		}
 	}
 	
 	method recudirDanio(danio){

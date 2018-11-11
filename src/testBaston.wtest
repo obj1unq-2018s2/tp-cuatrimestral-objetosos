@@ -18,24 +18,13 @@ describe " Baston Del Vacio"{
 	fixture{
 		ashe.comprar(anillo1)
 		ashe.comprar(anillo2)
-		
-	}
-	test " ashe"{
-		assert.equals(10,ashe.danio())
-		assert.equals(200,ashe.dinero())
-	}
-	test" Danio despues de usar el  Baston"{
 		ashe.comprar(baston)
-		baston.activar()
 		ashe.activarHabilidadItem(baston)
-	    assert.equals(0,ashe.danio())
-		
 	}
+
 	
-	test "Dinero despues de usar el baston"{
-		ashe.comprar(baston)
-		baston.activar()
-		ashe.activarHabilidadItem(baston)
+	test "Despues de usar el baston"{		
 		assert.equals(500,ashe.dinero())
+		assert.equals(0,ashe.danio())
 	}
 }
