@@ -3,6 +3,10 @@ import campeones.*
 class Soporte inherits Campeon {
 	var campeonVinculado = null
 	
+	method inventario() = self.itemsEquipados() + self.interseccionInventarios()
+	
+	method interseccionInventarios() = campeonVinculado.itemsEquipados().asSet().difference(self.itemsEquipados()).asList()
+	
 	method camperonVinculado() = campeonVinculado
 
 	method vincularCampeon(campeon) {
@@ -16,9 +20,10 @@ class Soporte inherits Campeon {
 		campeon.itemsEquipados().forEach{ item => 
 			self.itemsEquipados().remove(item)
 		}
-		self.itemsEquipados().clear()
 		campeonVinculado = null
 	}
+	
+	
 	
 	override method atacarA(unaOleada){		
 		super(unaOleada)

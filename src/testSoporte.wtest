@@ -40,9 +40,9 @@ describe " Testiando soporte "{
 		assert.equals(100, janna.dinero())
 	}
 	test "janna tiene pocion"{
-		assert.that(janna.itemsEquipados().contains(pocionVida))
+		assert.that(janna.inventario().contains(pocionVida))
 	}
 	test "janna tiene tomo"{
-		assert.that(janna.itemsEquipados().contains(tomoAmplificador))
+		assert.that(janna.inventario().contains(tomoAmplificador))
 	}
 }
