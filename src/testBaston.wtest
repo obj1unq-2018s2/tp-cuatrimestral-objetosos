@@ -1,0 +1,41 @@
+import items.*
+import campeones.*
+import oleadaMinions.*
+
+describe " Baston Del Vacio"{
+	
+	const ashe = new Campeon(vidaBase = 50,ataqueBase = 15, dinero = 800)
+	const anillo1 = new AnilloDeDoran()
+	const anillo2 = new AnilloDeDoran()
+	
+	const pocion = new PocionDeVida()
+	const sombrero = new SombreroDeRabadon()
+	
+	const baston = new BastonDelVacio(materiales = [pocion,sombrero])
+	
+	
+	
+	fixture{
+		ashe.comprar(anillo1)
+		ashe.comprar(anillo2)
+		
+	}
+	test " ashe"{
+		assert.equals(10,ashe.danio())
+		assert.equals(200,ashe.dinero())
+	}
+	test" Danio despues de usar el  Baston"{
+		ashe.comprar(baston)
+		baston.activar()
+		ashe.activarHabilidadItem(baston)
+	    assert.equals(0,ashe.danio())
+		
+	}
+	
+	test "Dinero despues de usar el baston"{
+		ashe.comprar(baston)
+		baston.activar()
+		ashe.activarHabilidadItem(baston)
+		assert.equals(500,ashe.dinero())
+	}
+}

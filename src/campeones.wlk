@@ -32,12 +32,7 @@ class Campeon{
 	}
 	
 	method recibirDanio(danio){
-		if(puntosDeDanio < danio){
-			puntosDeDanio += danio
-		}
-		else{
-			puntosDeDanio == 0
-		}
+		puntosDeDanio += danio
 	}
 	
 	method recudirDanio(danio){
@@ -80,5 +75,7 @@ class Campeon{
 		}
 	}
 	
-	method activarHabilidadItem(item){ item.habilidad(self)}
+	method activarHabilidadItem(item){ 
+		item.habilidad(self)
+	}
 }

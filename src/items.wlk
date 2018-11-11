@@ -1,47 +1,60 @@
 import oleadaMinions.*
 import campeones.*
 
-class AnilloDeDoran {
-	var property activado
+class Item {
+	var activado = false
 	
-	method vida(campeon) = 60
+	method vida(campeon) = 0
+	method ataque(campeon) = 0
 	
-	method ataque(campeon) = 15 
+	method equiparA(campeon){}
+	method desequiparA(campeon){}
+	
+	method habilidad(campeon){}
+	
+	method precio() = 0
+	
+	method activar(){ activado = true}
+		
+}
+
+class AnilloDeDoran inherits Item{
+	
+	override method vida(campeon) = 60
+	
+	override method ataque(campeon) = 15 
 
 	
-	method equiparA(campeon){
+	override method equiparA(campeon){
 		campeon.recibirDanio(5)
 	}
 	
-	method desequiparA(campeon){		
+	override method desequiparA(campeon){		
 		campeon.recibirDanio(-10)
 	} 
 	
-	method precio() = 300
-	
-	method habilidad(campeon){}
+	override method precio() = 300
 }
 
 
-class TomoAmplificador {
-	var property activado //BOOL
+class TomoAmplificador inherits Item {
 	
-	method vida(campeon) = campeon.danio() * 0.25
+	override method vida(campeon) = campeon.danio() * 0.25
 	
-	method ataque(campeon) = campeon.danio() * 0.05
+	override method ataque(campeon) = campeon.danio() * 0.05
 	
-	method equiparA(campeon){
+	override method equiparA(campeon){
 		campeon.recibirBloqueos(2)
 	}
 	
-	method desequiparA(campeon){		
+	override method desequiparA(campeon){		
 		campeon.recibirBloqueos(1)
 		campeon.recibirDanio(30)
 	}
 	
-	method precio() = 500
+	override method precio() = 500
 	
-	method habilidad(campeon){
+	override method habilidad(campeon){
 		if(activado){
 			if(campeon.dinero() < 500){
 				campeon.dinero(500)
@@ -53,46 +66,47 @@ class TomoAmplificador {
 }
 
 class  SombreroDeRabadon inherits TomoAmplificador{
-	override method vida(campeon){
-		return super(campeon) + 5
-	} 
+	override method vida(campeon) =  super(campeon) + 5
 	
-	override method ataque(campeon){
-		return campeon.ataqueBase() * 2 
-	} 
+	override method ataque(campeon)= campeon.ataqueBase() * 2 
 	
 	override method equiparA(campeon){
 		super(campeon) 
 		campeon.recibirDanio(5)
 	}
 	
-	override method desequiparA(campeon){} 
-	
 	override method precio() = super() + 100 
 	
-	override method habilidad(campeon){}
 }
 
-class PocionDeVida{
-	var property activado //BOOL
+class PocionDeVida inherits Item{
 	var usos =  2
+
+	override method precio() = 50
 	
-	method vida(campeon) = 0
-		
-	method ataque(campeon) = 0
-	
-	method equiparA(campeon){}
-	
-	method desequiparA(campeon){}
-	
-	method precio() = 50
-	
-	method habilidad(campeon){
+
+	override method habilidad(campeon){
 		if(activado){
 			if(usos > 0){
 				campeon.recibirDanio(-50)
 				usos -= 1
 			}else{}
 		}
-	}	
+	}
+	
+}
+
+
+class BastonDelVacio inherits Item{
+	const property materiales = []
+	
+	override method vida(campeon) = materiales.size() / 2
+	
+	override method ataque(campeon) = materiales.sum{material => material.ataque(campeon)}
+	
+	override method habilidad(campeon){
+		if(activado){
+			materiales.forEach{material => material.habilidad(campeon)}
+		}
+	}
 }
