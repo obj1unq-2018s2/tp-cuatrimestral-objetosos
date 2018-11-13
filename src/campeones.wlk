@@ -59,22 +59,21 @@ class Campeon{
 	} 
 	
 	method estaVivo(){
-		return self.vida() >= puntosDeDanio
+		return self.vida() > puntosDeDanio
 	}	
 
-	method dineroRecolectadoDe(minions) = if(self.ataque() > minions) minions else self.ataque() 
+	method dineroRecolectadoDe(minions) = self.ataque().min(minions)
 	//esta conciderado que si la cantidad de minions son 0 (osea estan muertos) retorna  0 
 	
 	method atacarA(unaOleada){		
 		if (bloqueos ==  0){
 			self.recibirDanio(unaOleada.ataque())
-			dinero += self.dineroRecolectadoDe(unaOleada.cantidadMinions())
-			unaOleada.recibirAtaque(self.ataque())
 		}
 		else{
 			bloqueos = bloqueos - 1
-			unaOleada.recibirAtaque(self.ataque())
 		}
+		dinero += self.dineroRecolectadoDe(unaOleada.cantidadMinions())
+		unaOleada.recibirAtaque(self.ataque())
 	}
 	
 	method activarHabilidadItem(item){ 

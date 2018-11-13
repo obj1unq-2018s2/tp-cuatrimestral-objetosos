@@ -85,7 +85,7 @@ class PocionDeVida inherits Item{
 		if(usos > 0){
 				campeon.recibirDanio(-50)
 				usos -= 1
-			}else{}
+			}
 	}
 	
 }
